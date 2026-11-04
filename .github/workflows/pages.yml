@@ -18,31 +18,45 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout viewer site
+        uses: actions/checkout@v4
+        with:
+          path: site
+
       - name: Checkout GeekDesign source
         uses: actions/checkout@v4
         with:
           repository: Leskur/geek-design
           ref: main
+          path: app
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
+          cache-dependency-path: app/package-lock.json
 
       - name: Install dependencies
+        working-directory: app
         run: npm ci
 
       - name: Build local viewer
+        working-directory: app
         env:
           VITE_BASE: /geek-design-viewer/
           VITE_LOCAL_ONLY: '1'
         run: npm run build:viewer
 
+      - name: Copy demo examples
+        run: |
+          mkdir -p app/dist/examples
+          cp -R site/examples/. app/dist/examples/
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: app/dist
 
   deploy:
     needs: build

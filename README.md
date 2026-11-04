@@ -2,19 +2,32 @@
 
 GeekDesign 的 **本地 Sketch 查看** 静态站，部署在 GitHub Pages。
 
-源码来自主仓库 [Leskur/geek-design](https://github.com/Leskur/geek-design)；本仓库只负责构建与发布，不存放业务源码。
+源码来自主仓库 [Leskur/geek-design](https://github.com/Leskur/geek-design)；本仓库负责发布，并存放演示用 Sketch 示例。
 
 ## 站点
 
-打开后即可选择本机 `.sketch` 文件。文件仅在浏览器内处理，不会上传。
+打开后即可选择本机 `.sketch` 文件，也可直接使用页面上的 **打开示例文件**。文件仅在浏览器内处理，不会上传。
 
 - 站点：https://leskur.github.io/geek-design-viewer/
+- 示例文件：[`examples/geekdesign-demo.sketch`](examples/geekdesign-demo.sketch)（自制演示稿，不含真实业务内容）
 - 完整版（含团队服务）：https://github.com/Leskur/geek-design
+
+## 示例稿
+
+`examples/geekdesign-demo.sketch` 保存在本仓库。部署时会复制进站点 `examples/` 目录。
+
+若要重新生成（需能解析 `@zip.js/zip.js`，可用主仓依赖）：
+
+```sh
+NODE_PATH=../geek-design/node_modules node scripts/build-demo-sketch.mjs
+```
+
+会写回 `examples/geekdesign-demo.sketch`。
 
 ## 如何部署
 
 1. 在本仓库 **Settings → Pages** 将 Source 设为 **GitHub Actions**
 2. 打开 **Actions**，运行 **Deploy GitHub Pages**（`workflow_dispatch`），或向 `main` 推送以触发
-3. 构建会拉取 `Leskur/geek-design@main`，以 `VITE_LOCAL_ONLY=1` 与 `VITE_BASE=/geek-design-viewer/` 执行 `npm run build:viewer`
+3. 构建会拉取 `Leskur/geek-design@main`，以 `VITE_LOCAL_ONLY=1` 与 `VITE_BASE=/geek-design-viewer/` 执行 `npm run build:viewer`，再并入本仓库示例文件
 
 主仓库需为 public，或为 workflow 配置可读取源码的 token。
