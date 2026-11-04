@@ -9,7 +9,7 @@ GeekDesign 的 **本地 Sketch 查看** 静态站，部署在 GitHub Pages。
 打开后即可选择本机 `.sketch` 文件，也可直接使用页面上的 **打开示例文件**。文件仅在浏览器内处理，不会上传。
 
 - 站点：https://leskur.github.io/geek-design-viewer/
-- 示例文件：[`examples/geekdesign-demo.sketch`](examples/geekdesign-demo.sketch)（自制演示稿，不含真实业务内容）
+- 示例文件：[`examples/geekdesign-demo.sketch`](examples/geekdesign-demo.sketch)（仿 README 截图的 MONO 任务/项目演示稿，不含真实业务内容）
 - 完整版（含团队服务）：https://github.com/Leskur/geek-design
 
 ## 示例稿
