@@ -2,8 +2,13 @@ name: Deploy GitHub Pages
 
 on:
   workflow_dispatch:
+  # Primary deploys come from Leskur/geek-design (gh workflow run).
+  # Keep push only for this repo's own assets (examples / workflow).
   push:
     branches: [main]
+    paths:
+      - 'examples/**'
+      - '.github/workflows/pages.yml'
 
 permissions:
   contents: read

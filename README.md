@@ -27,7 +27,9 @@ NODE_PATH=../geek-design/node_modules node scripts/build-demo-sketch.mjs
 ## 如何部署
 
 1. 在本仓库 **Settings → Pages** 将 Source 设为 **GitHub Actions**
-2. 打开 **Actions**，运行 **Deploy GitHub Pages**（`workflow_dispatch`），或向 `main` 推送以触发
-3. 构建会拉取 `Leskur/geek-design@main`，以 `VITE_LOCAL_ONLY=1` 与 `VITE_BASE=/geek-design-viewer/` 执行 `npm run build:viewer`，再并入本仓库示例文件
+2. 在主仓库 [Leskur/geek-design](https://github.com/Leskur/geek-design) 配置 secret `VIEWER_DEPLOY_TOKEN`（能对 `Leskur/geek-design-viewer` 执行 `actions:write` 的 PAT）
+3. **默认**：向主仓库 `main` 推送会影响 viewer 构建的代码时，会自动触发本仓库的 **Deploy GitHub Pages**
+4. **本仓库**：改 `examples/` 或本 workflow 并推送到 `main` 也会部署；也可在 Actions 里手动运行 **Deploy GitHub Pages**
+5. 构建会拉取 `Leskur/geek-design@main`，以 `VITE_LOCAL_ONLY=1` 与 `VITE_BASE=/geek-design-viewer/` 执行 `npm run build:viewer`，再并入本仓库示例文件
 
-主仓库需为 public，或为 workflow 配置可读取源码的 token。
+主仓库需为 public，或为本 workflow 配置可读取源码的 token。
